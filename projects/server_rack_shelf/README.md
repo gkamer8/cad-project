@@ -1,12 +1,17 @@
 # server_rack_shelf
 
-A shelf for a standard 19" open server rack (EIA-310).
+A 1U four-post shelf for a standard 19" open server rack (EIA-310).
 
-## Status
+## Design
 
-Scaffold only. `build_shelf` currently returns a flat plate at rack-face
-width — the real cantilever geometry, mounting flange, and hole pattern
-land in the next feature branch.
+Two manufactured designs, three parts to install per shelf:
+
+- **bracket** — bent sheet-metal L. The vertical flange bolts to a rack rail through two EIA-310 holes (M6, cage-nut). The horizontal arm extends away from the rail with a single slotted hole that the top bolts down through. X-symmetric, so the **same part is used at all four corners** — front pair as drawn, rear pair rotated 180° about Z. Manufacture ×4.
+- **top** — flat sheet-metal panel matching the rack depth. Two plain mounting holes at the front (at the rail pitch) and two fore-aft slotted holes at the rear. Manufacture ×1.
+
+The slots in the bracket arms and the slots in the rear of the top combine to absorb variation in the rear-rail position. Set `rack_depth_mm` in [params.py](params.py) to your rack's nominal front-to-rear rail spacing; the rear rail can then sit anywhere within roughly ±80 mm of that value without re-manufacturing parts.
+
+Material: 2 mm cold-rolled steel for both parts.
 
 ## Build
 
@@ -16,7 +21,7 @@ From the repo root:
 uv run python -m projects.server_rack_shelf
 ```
 
-Output: `exports/shelf.step`.
+Outputs: `exports/bracket.step`, `exports/top.step`.
 
 ## Visualize
 
@@ -29,8 +34,9 @@ or `viewer.py` change.
 
 ## Parameters
 
-Defined in [params.py](params.py). Edit `SHELF_1U_CANTILEVER` (or define
-a new named instance) and re-run the build.
+Defined in [params.py](params.py). Edit `SHELF_1U_4POST` (or define
+a new named instance) and re-run the build. The most likely value to
+change is `rack_depth_mm` (and `top.depth_mm` to match).
 
 ## Reference dimensions
 

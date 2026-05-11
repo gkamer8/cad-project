@@ -1,14 +1,19 @@
-"""Build the server-rack shelf and export it as STEP."""
+"""Build the server-rack shelf parts and export each as a STEP file."""
 from pathlib import Path
 
 import cadquery as cq
 
-from projects.server_rack_shelf.model import build_shelf
-from projects.server_rack_shelf.params import SHELF_1U_CANTILEVER
+from projects.server_rack_shelf.model import build_bracket, build_top
+from projects.server_rack_shelf.params import SHELF_1U_4POST
 
 
-EXPORT_PATH = Path(__file__).parent / "exports" / "shelf.step"
+EXPORT_DIR = Path(__file__).parent / "exports"
 
-shelf = build_shelf(SHELF_1U_CANTILEVER)
-cq.exporters.export(shelf, str(EXPORT_PATH))
-print(f"wrote {EXPORT_PATH}")
+bracket_path = EXPORT_DIR / "bracket.step"
+top_path = EXPORT_DIR / "top.step"
+
+cq.exporters.export(build_bracket(SHELF_1U_4POST.bracket), str(bracket_path))
+print(f"wrote {bracket_path}")
+
+cq.exporters.export(build_top(SHELF_1U_4POST.top), str(top_path))
+print(f"wrote {top_path}")
