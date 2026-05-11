@@ -1,19 +1,22 @@
 """CadQuery models for the server-rack shelf parts.
 
-The shelf is two manufactured parts:
+The shelf is two manufactured designs:
 
 * ``bracket`` — a bent sheet-metal L. The vertical flange bolts to a
-  rack rail through two EIA-310 holes; the horizontal arm cantilevers
-  back into the rack and carries two depth-adjust slots that the top
-  bolts down through. The part is mirror-symmetric about its width
-  axis, so one design serves both rails.
-* ``top`` — a flat sheet-metal panel with four plain mounting holes at
-  the rack rail pitch, bolted down through the bracket slots.
+  rack rail through two EIA-310 holes; the horizontal arm extends away
+  from the rail with a single slotted hole that the top bolts down
+  through. The part is X-symmetric, so the same design is used at all
+  four corners of the shelf (rotated 180 degrees about Z for the rear
+  pair).
+* ``top`` — a flat sheet-metal panel with two plain mounting holes at
+  the front (rail pitch) and two fore-aft slotted holes at the rear.
+  Combined with the bracket arm slot, the rear slots absorb variation
+  in rear-rail depth.
 
 The bracket's local coordinate system:
 * origin at the centerline of the front-bottom edge (the bend),
 * +X spans the bracket width,
-* +Y points backward into the rack,
+* +Y points along the arm, away from the flange,
 * +Z points up.
 
 The top's local coordinate system:
@@ -52,12 +55,7 @@ def build_bracket(params: BracketParams) -> cq.Workplane:
         .box(w, arm_length, t, centered=(True, False, True))
         .faces(">Z")
         .workplane(centerOption="CenterOfBoundBox")
-        .pushPoints(
-            [
-                (0, params.front_slot_center_y_mm - arm_length / 2),
-                (0, params.rear_slot_center_y_mm - arm_length / 2),
-            ]
-        )
+        .center(0, params.slot_center_y_mm - arm_length / 2)
         .slot2D(params.slot_length_mm, params.mount_hole_diameter_mm, angle=90)
         .cutThruAll()
     )
@@ -69,7 +67,7 @@ def build_top(params: TopParams) -> cq.Workplane:
     half_pitch = RAIL_HOLE_PITCH_HORIZONTAL_MM / 2
     half_depth = params.depth_mm / 2
 
-    return (
+    plate = (
         cq.Workplane("XY")
         .box(
             params.width_mm,
@@ -83,9 +81,20 @@ def build_top(params: TopParams) -> cq.Workplane:
             [
                 (-half_pitch, params.front_hole_y_mm - half_depth),
                 (half_pitch, params.front_hole_y_mm - half_depth),
-                (-half_pitch, params.rear_hole_y_mm - half_depth),
-                (half_pitch, params.rear_hole_y_mm - half_depth),
             ]
         )
         .hole(params.mount_hole_diameter_mm)
+    )
+
+    return (
+        plate.faces(">Z")
+        .workplane(centerOption="CenterOfBoundBox")
+        .pushPoints(
+            [
+                (-half_pitch, params.rear_slot_center_y_mm - half_depth),
+                (half_pitch, params.rear_slot_center_y_mm - half_depth),
+            ]
+        )
+        .slot2D(params.rear_slot_length_mm, params.mount_hole_diameter_mm, angle=90)
+        .cutThruAll()
     )

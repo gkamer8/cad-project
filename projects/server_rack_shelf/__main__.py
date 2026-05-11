@@ -4,7 +4,7 @@ from pathlib import Path
 import cadquery as cq
 
 from projects.server_rack_shelf.model import build_bracket, build_top
-from projects.server_rack_shelf.params import SHELF_1U_CANTILEVER
+from projects.server_rack_shelf.params import SHELF_1U_4POST
 
 
 EXPORT_DIR = Path(__file__).parent / "exports"
@@ -12,8 +12,8 @@ EXPORT_DIR = Path(__file__).parent / "exports"
 bracket_path = EXPORT_DIR / "bracket.step"
 top_path = EXPORT_DIR / "top.step"
 
-cq.exporters.export(build_bracket(SHELF_1U_CANTILEVER.bracket), str(bracket_path))
+cq.exporters.export(build_bracket(SHELF_1U_4POST.bracket), str(bracket_path))
 print(f"wrote {bracket_path}")
 
-cq.exporters.export(build_top(SHELF_1U_CANTILEVER.top), str(top_path))
+cq.exporters.export(build_top(SHELF_1U_4POST.top), str(top_path))
 print(f"wrote {top_path}")
