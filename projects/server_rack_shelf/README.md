@@ -18,6 +18,15 @@ uv run python -m projects.server_rack_shelf
 
 Output: `exports/shelf.step`.
 
+## Visualize
+
+```sh
+uv run cq-studio projects/server_rack_shelf/viewer.py
+```
+
+Open <http://127.0.0.1:32323/>. The viewer reloads when `model.py`, `params.py`,
+or `viewer.py` change.
+
 ## Parameters
 
 Defined in [params.py](params.py). Edit `SHELF_1U_CANTILEVER` (or define
