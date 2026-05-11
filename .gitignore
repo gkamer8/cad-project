@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.python-version.local
+
+# CAD export artifacts
+*.step
+*.stp
+*.stl
+*.dxf
+*.brep
+*.iges
+*.igs
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
