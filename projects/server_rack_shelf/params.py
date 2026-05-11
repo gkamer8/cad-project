@@ -1,8 +1,11 @@
 """Design parameters for the server-rack shelf.
 
-EIA-310 reference values (1U height, rail hole-to-hole horizontal pitch, etc.)
-live here as module-level constants and are reused by ``model.py``. All
-dimensions are millimeters unless suffixed otherwise.
+EIA-310 reference values live at module scope as ``Final`` constants and
+are reused by ``model.py``. Per-part geometry is captured in frozen
+dataclasses; ``ShelfDesign`` groups the bracket and top parameters
+together so a single named instance describes a complete shelf.
+
+All dimensions are millimeters.
 """
 from dataclasses import dataclass
 from typing import Final
@@ -12,16 +15,58 @@ RACK_UNIT_MM: Final[float] = 44.45
 RAIL_HOLE_PITCH_HORIZONTAL_MM: Final[float] = 465.1
 RACK_FACE_WIDTH_MM: Final[float] = 482.6
 
+# Within a 1U flange centered vertically on its rack slot, the two
+# usable EIA-310 hole centers sit symmetrically at +/- this offset from
+# the slot's vertical midpoint (i.e., 6.35 mm above the lower U boundary
+# and 6.35 mm below the upper U boundary).
+EIA_HOLE_Z_OFFSET_MM: Final[float] = 15.875
+
 
 @dataclass(frozen=True)
-class ShelfParams:
-    height_u: int
-    depth_mm: float
+class BracketParams:
     thickness_mm: float
+    width_mm: float
+    flange_height_mm: float
+    arm_length_mm: float
+    mount_hole_diameter_mm: float
+    slot_length_mm: float
+    front_slot_center_y_mm: float
+    rear_slot_center_y_mm: float
 
 
-SHELF_1U_CANTILEVER = ShelfParams(
-    height_u=1,
-    depth_mm=250.0,
-    thickness_mm=2.0,
+@dataclass(frozen=True)
+class TopParams:
+    thickness_mm: float
+    depth_mm: float
+    width_mm: float
+    mount_hole_diameter_mm: float
+    front_hole_y_mm: float
+    rear_hole_y_mm: float
+
+
+@dataclass(frozen=True)
+class ShelfDesign:
+    bracket: BracketParams
+    top: TopParams
+
+
+SHELF_1U_CANTILEVER = ShelfDesign(
+    bracket=BracketParams(
+        thickness_mm=2.0,
+        width_mm=30.0,
+        flange_height_mm=RACK_UNIT_MM,
+        arm_length_mm=250.0,
+        mount_hole_diameter_mm=7.0,
+        slot_length_mm=40.0,
+        front_slot_center_y_mm=90.0,
+        rear_slot_center_y_mm=200.0,
+    ),
+    top=TopParams(
+        thickness_mm=2.0,
+        depth_mm=250.0,
+        width_mm=482.0,
+        mount_hole_diameter_mm=7.0,
+        front_hole_y_mm=70.0,
+        rear_hole_y_mm=180.0,
+    ),
 )

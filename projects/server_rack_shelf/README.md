@@ -1,12 +1,17 @@
 # server_rack_shelf
 
-A shelf for a standard 19" open server rack (EIA-310).
+A 1U cantilever shelf for a standard 19" open server rack (EIA-310).
 
-## Status
+## Design
 
-Scaffold only. `build_shelf` currently returns a flat plate at rack-face
-width — the real cantilever geometry, mounting flange, and hole pattern
-land in the next feature branch.
+Two manufactured parts:
+
+- **bracket** — bent sheet-metal L. The vertical flange bolts to a rack rail through two EIA-310 holes (M6, cage-nut). The horizontal arm cantilevers back into the rack and carries two slotted holes that the top bolts down through. Mirror-symmetric, so one part fits both sides.
+- **top** — flat sheet-metal panel sized to the rack-face width, with four plain holes at the rack-rail pitch.
+
+Depth is adjustable in place: the slots in the bracket arms give 40 mm of fore/aft slide for the top before you tighten the bolts. No part swap, no precise measurement required.
+
+Material: 2 mm cold-rolled steel for both parts.
 
 ## Build
 
@@ -16,7 +21,7 @@ From the repo root:
 uv run python -m projects.server_rack_shelf
 ```
 
-Output: `exports/shelf.step`.
+Outputs: `exports/bracket.step`, `exports/top.step`.
 
 ## Visualize
 
