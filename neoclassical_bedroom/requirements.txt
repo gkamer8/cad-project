@@ -1,0 +1,9 @@
+# Python 3.11 (bpy 4.5 LTS wheels are cp311). Node + Playwright (Chromium) prints the review PDF.
+bpy==4.5.17
+ezdxf==1.4.5
+numpy==1.26.4
+pillow==13.0.0
+pymupdf==2.2
+pypdf==7.1.1
+scipy==1.17.1
+shapely==2.2.0

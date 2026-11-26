@@ -1,0 +1,6 @@
+# Deliverables are committed on purpose (the repository root ignores *.dxf).
+!*.dxf
+# Downloaded CC0 textures / OFL fonts (tools/fetch_assets.py) and build intermediates.
+assets/
+output/textures/
+output/report/
