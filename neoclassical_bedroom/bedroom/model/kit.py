@@ -127,13 +127,8 @@ def turned(profile, segments: int) -> Mesh:
     return lathe(profile, segments, smooth_turning)
 
 
-def strip_sheet(rows: np.ndarray) -> Mesh:
-    """Open sheet through a (rows, cols, 3) lattice (fabric)."""
-    return grid(rows, wrap_rows=False, wrap_cols=False)
 
 
-def solid_from_rings(rings: np.ndarray) -> Mesh:
-    return loft(rings)
 
 
 def revolve_open(profile_rz, segments: int, modulation) -> Mesh:

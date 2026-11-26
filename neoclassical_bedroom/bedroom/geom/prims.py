@@ -133,8 +133,6 @@ def superellipsoid(size, e_vertical: float, e_horizontal: float, rows: int, cols
     return loft(pts)
 
 
-def displaced(mesh: Mesh, fn: Callable[[np.ndarray], np.ndarray]) -> Mesh:
-    return Mesh(fn(mesh.verts.copy()), mesh.loops, mesh.sizes)
 
 
 def arc(center, radius: float, deg0: float, deg1: float, count: int) -> np.ndarray:
@@ -143,9 +141,6 @@ def arc(center, radius: float, deg0: float, deg1: float, count: int) -> np.ndarr
     return np.c_[c[0] + radius * np.cos(a), c[1] + radius * np.sin(a), np.full(count, c[2])]
 
 
-def rect_path(x0: float, y0: float, x1: float, y1: float, z: float) -> np.ndarray:
-    """Counter-clockwise rectangle (seen from +z)."""
-    return np.array([[x0, y0, z], [x1, y0, z], [x1, y1, z], [x0, y1, z]], dtype=float)
 
 
 def wave_noise(points: np.ndarray, seed: int, scale: float, amplitude: float) -> np.ndarray:

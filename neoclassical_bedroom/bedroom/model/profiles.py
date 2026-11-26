@@ -137,15 +137,6 @@ ENTABLATURE_CORNICE = _poly([
     (2.6, 1.75), (2.6, 2.0), (-0.5, 2.0),
 ])
 
-# Tabletop edge (marble): a outward from the top outline, b height from slab bottom.
-SLAB_EDGE = _poly([
-    (-0.75, 0.0), (0.05, 0.0),
-    *quadrant((0.05, 0.3), 0.3, 0.3, -90, 0, 5),
-    (0.35, 0.55),
-    *ogee((0.35, 0.55), (0.6, 1.0), 6),
-    (0.6, 1.1), (0.5, 1.2), (-0.75, 1.2),
-])
-
 DETAILED_PROFILES = (
     ("CROWN MOLDING", CROWN),
     ("CHAIR RAIL", CHAIR_RAIL),

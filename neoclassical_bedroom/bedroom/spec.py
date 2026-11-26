@@ -10,7 +10,6 @@ from enum import Enum
 import numpy as np
 
 PROJECT = "The Pompeian Bedroom"
-SUBTITLE = "Neoclassical bedroom  |  16'-0\" x 12'-0\"  |  8'-0\" ceiling"
 
 ROOM_L = 192.0  # x, 16'-0"
 ROOM_W = 144.0  # y, 12'-0"

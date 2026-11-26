@@ -150,7 +150,7 @@ def _canopy() -> dict[Mat, list[Mesh]]:
     out[Mat.GILT] += [finial_urn(1.2).moved((x, BOX_FRONT, 8.0)) for x in (-BOX_HALF + 1.5, BOX_HALF - 1.5)]
     out[Mat.SILK_RED].append(_valance(2.7, 0.6, 9.0, 2.4, 0.45))
     out[Mat.GILT].append(_valance(2.85, -6.2, 8.0, 2.4, 0.5))  # bullion fringe below the scallops
-    out[Mat.SILK_IVORY].append(box((-BOX_HALF + 0.5, BOX_BACK, -0.6), (BOX_HALF - 0.5, BOX_FRONT, -0.1)))
+    out[Mat.SILK_RED].append(box((-BOX_HALF + 0.5, BOX_BACK, -0.6), (BOX_HALF - 0.5, BOX_FRONT, -0.1)))  # lining
     floor = -CANOPY.placements[0].z
     plane = BOX_HALF - 0.7
     for side in (-1.0, 1.0):
