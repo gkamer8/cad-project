@@ -14,7 +14,7 @@ from .materials import build_materials
 INCH = 0.0254
 
 
-def _mesh(part: Part) -> bpy.types.Mesh:
+def mesh_from_part(part: Part) -> bpy.types.Mesh:
     m = part.mesh
     me = bpy.data.meshes.new(part.name)
     me.vertices.add(len(m.verts))
@@ -33,7 +33,7 @@ def _smooth(obj: bpy.types.Object, angle_deg: float):
     obj.data.set_sharp_from_angle(angle=radians(angle_deg))
 
 
-def _apply_shading(obj: bpy.types.Object, shading: Shading):
+def apply_shading(obj: bpy.types.Object, shading: Shading):
     if shading is Shading.CRISP:
         _smooth(obj, 38.0)
     if shading is Shading.EASED:
@@ -56,10 +56,10 @@ def build_objects(parts: list[Part]) -> dict[str, bpy.types.Object]:
         collections[group] = col
     objects = {}
     for part in parts:
-        obj = bpy.data.objects.new(part.name, _mesh(part))
+        obj = bpy.data.objects.new(part.name, mesh_from_part(part))
         obj.data.materials.append(materials[part.mat])
         collections[part.group].objects.link(obj)
-        _apply_shading(obj, part.shading)
+        apply_shading(obj, part.shading)
         objects[part.name] = obj
     return objects
 

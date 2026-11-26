@@ -19,6 +19,15 @@ AutoCAD drawing set and the review PDF, so they always agree.
 
 DWG: the DXF files open directly in AutoCAD (File > Open > DXF); use SAVEAS to keep a DWG copy.
 
+### Website
+
+`build_site.py` assembles `output/site/`, a page published as a claude.ai Artifact (with `output/site`
+as its root). Its centrepiece is a three.js explorer of the same model: orbit, walk-through, plan and
+elevation views, section cuts, measuring, layers, object properties, display modes and day/evening
+lighting. Below it are the renderings, the zoomable drawing sheets, the specifications and the CAD
+downloads. Artifact pages serve only web file types, so the GLB and FBX ship base64-encoded and the
+DXF as plain text; the page decodes the model and builds the download zips in the browser.
+
 ### Drawing set
 
 | Sheet | Title | Scale |
@@ -50,15 +59,16 @@ Assumptions to confirm: window and door locations, queen bed, wall thicknesses (
 
 ## Rebuilding
 
-Python 3.11 with `pip install -r requirements.txt`, plus Node with Playwright/Chromium for the PDF.
+Python 3.11 with `pip install -r requirements.txt`, plus Node with Playwright/Chromium for the PDF
+and `npm install @gltf-transform/cli@4.1.0` for the website's compressed model.
 
 ```sh
-PY=/path/to/python3.11 ./build_all.sh
+PY=/path/to/python3.11 GLTF_TRANSFORM=node_modules/.bin/gltf-transform ./build_all.sh
 ```
 
 `build_all.sh` fetches the CC0 textures/HDRI (Poly Haven) and OFL fonts into `assets/`, renders the
 six views (about 15 minutes each on 4 CPU cores), builds the DXF/PDF drawing set, exports FBX/OBJ and
-assembles the review PDF. Each step can also be run on its own; see the scripts' docstrings.
+assembles the review PDF and the website. Each step can also be run on its own; see the scripts' docstrings.
 
 ## Code layout
 
@@ -70,6 +80,9 @@ bedroom/render/          Blender/Cycles materials, scene, cameras and lighting m
 bedroom/drawings/        ezdxf drawing set: plans, RCP, elevations, details, sheets, hidden-line silhouettes
 bedroom/report/          review-book HTML (printed by tools/print_pdf.cjs)
 bedroom/textures/rug.py  procedural Aubusson-style rug artwork
+bedroom/web/             website: model catalog (assemblies, layers, finishes, views), GLB export, HTML and CSS
+web/                     browser code: explorer/ (viewer, navigation, tools, materials) and site.js
 ```
 
-Textures: Poly Haven (CC0). Fonts: Cormorant Garamond and Inter (SIL Open Font License).
+Textures: Poly Haven (CC0). Fonts: Cormorant Garamond and Inter (SIL Open Font License);
+the website loads Bodoni Moda and IBM Plex from Google Fonts.

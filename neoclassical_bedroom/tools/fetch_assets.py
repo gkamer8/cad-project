@@ -39,7 +39,8 @@ def main() -> None:
         for key, short in MAPS.items():
             save(files[key][res]["jpg"]["url"], TEXTURES / asset / f"{short}.jpg")
     hdri = json.loads(get("https://api.polyhaven.com/files/borghese_gardens"))
-    save(hdri["hdri"]["4k"]["hdr"]["url"], TEXTURES / "hdri" / "borghese_gardens_4k.hdr")
+    for res in ("4k", "1k"):  # 4k lights the renders, 1k ships with the web explorer
+        save(hdri["hdri"][res]["hdr"]["url"], TEXTURES / "hdri" / f"borghese_gardens_{res}.hdr")
     css_out = []
     for family in FONT_FAMILIES:  # plain user agent -> Google serves TrueType files
         css = urllib.request.urlopen(f"https://fonts.googleapis.com/css2?family={family}", timeout=60).read().decode()

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Regenerate every deliverable. Usage: PY=/path/to/python3.11 ./build_all.sh
+# Regenerate every deliverable.
+# Usage: PY=/path/to/python3.11 GLTF_TRANSFORM=/path/to/gltf-transform ./build_all.sh
 set -euo pipefail
 cd "$(dirname "$0")"
 "$PY" -I tools/fetch_assets.py
@@ -7,3 +8,4 @@ cd "$(dirname "$0")"
 "$PY" build_cad.py --out output/cad --previews output/sheets
 "$PY" export_3d.py --out output/cad
 "$PY" build_report.py --renders output/renders --cad output/cad --out output --previews output/report/previews
+"$PY" build_site.py --gltf-transform "$GLTF_TRANSFORM"
