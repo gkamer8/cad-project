@@ -45,14 +45,14 @@ class Sheet:
 PLAN = Drawing((0.0, 0.0), (ROOM_L / 2 + 4, ROOM_W / 2), 24.0, "1/2\" = 1'-0\"")
 RCP = Drawing((0.0, -320.0), (ROOM_L / 2 + 4, ROOM_W / 2), 24.0, "1/2\" = 1'-0\"")
 ELEV = {
-    Wall.NORTH: Drawing((420.0, 0.0), (ROOM_L / 2 + 6, 35.0), 32.0, "3/8\" = 1'-0\""),
-    Wall.SOUTH: Drawing((420.0, -200.0), (ROOM_L / 2 + 6, 35.0), 32.0, "3/8\" = 1'-0\""),
+    Wall.NORTH: Drawing((420.0, 0.0), (ROOM_L / 2 + 8, 38.0), 24.0, "1/2\" = 1'-0\""),
+    Wall.SOUTH: Drawing((420.0, -200.0), (ROOM_L / 2 + 8, 38.0), 24.0, "1/2\" = 1'-0\""),
     Wall.EAST: Drawing((760.0, 0.0), (ROOM_W / 2 + 6, 40.0), 16.0, "3/4\" = 1'-0\""),
     Wall.WEST: Drawing((760.0, -200.0), (ROOM_W / 2 + 6, 40.0), 16.0, "3/4\" = 1'-0\""),
 }
 DETAILS = Drawing((1000.0, 0.0), (12.6, 0.7), 2.0, "6\" = 1'-0\"")
-ELEV_NUMBERS = {Wall.NORTH: "1", Wall.SOUTH: "2", Wall.EAST: "1", Wall.WEST: "1"}
-ELEV_SHEETS = {Wall.NORTH: "A-201", Wall.SOUTH: "A-201", Wall.EAST: "A-202", Wall.WEST: "A-203"}
+ELEV_NUMBERS = {Wall.NORTH: "1", Wall.SOUTH: "1", Wall.EAST: "1", Wall.WEST: "1"}
+ELEV_SHEETS = {Wall.NORTH: "A-201", Wall.SOUTH: "A-202", Wall.EAST: "A-203", Wall.WEST: "A-204"}
 
 def _title_block(c: Canvas, sheet: Sheet, index: int) -> None:
     c.rect(0.25, 0.25, SHEET_W - 0.25, SHEET_H - 0.25, Layer.TTLB)
@@ -116,10 +116,10 @@ SHEETS = (
     Sheet("A-001", "COVER, NOTES & SCHEDULES", (), schedules),
     Sheet("A-101", "FLOOR PLAN & FURNITURE LAYOUT", (Port(PLAN, (7.05, 5.55), (13.3, 10.0)),), _plan_notes),
     Sheet("A-102", "REFLECTED CEILING, LIGHTING & POWER", (Port(RCP, (6.2, 5.55), (11.6, 10.0)),), _rcp_notes),
-    Sheet("A-201", "INTERIOR ELEVATIONS - NORTH & SOUTH",
-          (Port(ELEV[Wall.NORTH], (7.05, 8.05), (9.6, 5.0)), Port(ELEV[Wall.SOUTH], (7.05, 3.05), (9.6, 5.0))), _no_notes),
-    Sheet("A-202", "INTERIOR ELEVATION - EAST (DOOR WALL)", (Port(ELEV[Wall.EAST], (7.05, 5.75), (12.6, 9.6)),), _no_notes),
-    Sheet("A-203", "INTERIOR ELEVATION - WEST (BED WALL)", (Port(ELEV[Wall.WEST], (7.05, 5.75), (12.6, 9.6)),), _no_notes),
+    Sheet("A-201", "INTERIOR ELEVATION - NORTH", (Port(ELEV[Wall.NORTH], (7.05, 5.75), (13.3, 9.6)),), _no_notes),
+    Sheet("A-202", "INTERIOR ELEVATION - SOUTH", (Port(ELEV[Wall.SOUTH], (7.05, 5.75), (13.3, 9.6)),), _no_notes),
+    Sheet("A-203", "INTERIOR ELEVATION - EAST (DOOR WALL)", (Port(ELEV[Wall.EAST], (7.05, 5.75), (12.6, 9.6)),), _no_notes),
+    Sheet("A-204", "INTERIOR ELEVATION - WEST (BED WALL)", (Port(ELEV[Wall.WEST], (7.05, 5.75), (12.6, 9.6)),), _no_notes),
     Sheet("A-501", "MILLWORK PROFILE DETAILS", (Port(DETAILS, (7.05, 5.8), (13.3, 8.5)),), _detail_notes),
 )
 

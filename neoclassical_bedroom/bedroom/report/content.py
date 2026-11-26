@@ -50,7 +50,7 @@ QUESTIONS = (
     "Canopy curtains in champagne silk, or crimson to match the windows?",
 )
 HOW_TO_OPEN = (
-    ("AutoCAD / AutoCAD LT", "Open <b>Pompeian_Bedroom_Drawings.dxf</b> directly. Seven layout tabs (A-001 to "
+    ("AutoCAD / AutoCAD LT", "Open <b>Pompeian_Bedroom_Drawings.dxf</b> directly. Eight layout tabs (A-001 to "
                              "A-501) are set up as 17 x 11 sheets with scaled viewports. SAVEAS converts to DWG."),
     ("AutoCAD 3D", "<b>Pompeian_Bedroom_3D_Model.dxf</b>: every object is a MESH on a layer per category and "
                    "finish (e.g. I-FURN-3D-GL-1), in inches. Use any 3D view with the Realistic visual style."),

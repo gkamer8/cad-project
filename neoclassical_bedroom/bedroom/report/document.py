@@ -59,7 +59,7 @@ td.tag { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 
 ol, ul { margin: 0; padding-left: .22in; font-size: 10.5pt; line-height: 1.55; }
 li { margin-bottom: .07in; }
 .note { font-size: 9pt; color: var(--muted); line-height: 1.5; }
-.two img { width: 100%; height: 5.1in; object-fit: cover; display: block; }
+.two img { width: 100%; height: 6.6in; object-fit: cover; display: block; }
 .figcap { font-size: 9.5pt; margin-top: .08in; line-height: 1.45; }
 .figcap b { font-family: 'Cormorant Garamond', serif; font-size: 14pt; color: var(--deep); font-weight: 600; }
 """
